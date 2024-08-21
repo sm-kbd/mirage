@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            <div class="content-section">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-3">ログイン</legend>
+                    </fieldset>
+                    {{ form|crispy }}
+            </div>
+            <div class="form-group float-end mt-3">
+                <small class="text-muted me-3">
+                    未登録の方は<a class="ms-1" href="/register/">こちらへ</a>
+                </small>
+                <button class="btn btn-outline-info" type="submit">ログイン</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+

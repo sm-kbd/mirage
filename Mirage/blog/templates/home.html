@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container me-5">
+        <div class="row">
+            <div class="col-md-7 panel panel-default">
+                {% for post in posts %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <h2><a class="article-title" href="/post/{{ post.id }}">{{ post.title }}</a></h2>
+                            <div class="article-metadata">
+                                <a class="mr-2" href="/user/{{ post.author.id }}">{{ post.author }}</a>
+                                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                            </div>
+                        <p class="article-content">{{ post.body }}</p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+            <div class="col-md-1 d-flex">
+                <div class="vr"></div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group content-section">
+                        <h4 class="text-muted">新しいブログを記す</h4>
+                        {{ form|crispy }}
+                        <button class="mt-3 float-end col-md-2 btn btn-outline-info" placeholder="記す" type="submit">記す</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
